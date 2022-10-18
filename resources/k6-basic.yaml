@@ -1,0 +1,18 @@
+# K6 resources act as a trigger for starting a test run.
+#
+# Simple test execution which uses the public k6 image (NOT your custom image). Output must
+# be scraped from container logs and aggregated on your own.
+#
+apiVersion: k6.io/v1alpha1
+kind: K6
+metadata:
+  name: k6-basic
+spec:
+  parallelism: 2
+  script:
+    configMap:
+      # Remember...we created the 'test-scripts' ConfigMap with the available scripts inside.
+      # Recreate the ConfigMag if you modify scripts or want additional scripts.
+      name: test-scripts
+      # TODO - Want a different test script? Change it here.
+      file: simple.js
