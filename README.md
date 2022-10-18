@@ -3,6 +3,8 @@
 ## Prerequisites
 * [git](https://git-scm.com/) - For accessing the sourcecode repositories.
 * [Docker](https://docs.docker.com/get-docker/) - For building our custom k6 and running the examples.
+* [kubectl](https://kubernetes.io/releases/download/#kubectl) - Client for talking to Kubernetes clusters.
+* [go](https://go.dev/doc/install) - To build and install k6-operator.
 
 There _may_ be others that I didn't recall as having them installed long ago. My apologies for any issues!
 
