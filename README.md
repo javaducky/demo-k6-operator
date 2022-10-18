@@ -33,7 +33,7 @@ docker build -t javaducky/demo-k6-operator:latest .
 # Publish your image to Dockerhub or whichever container registry your Kubernetes cluster can access.
 docker push javaducky/demo-k6-operator:latest
 ```
-> :point-right: If you've browsed the [list of known extensions](https://k6.io/docs/extensions/getting-started/explore/) and wish
+> :point_right: If you've browsed the [list of known extensions](https://k6.io/docs/extensions/getting-started/explore/) and wish
 > to include more custom functionality, update the [Dockerfile]() to include your desired extensions using the `--with`
 > option. More details about building custom binaries with xk6 can be found in the [documentation](https://k6.io/docs/extensions/guides/build-a-k6-binary-with-extensions/).
 
@@ -53,7 +53,7 @@ docker run -v $PWD:/scripts -it --rm javaducky/demo-k6-operator run /scripts/tes
 # To run another image, override the `IMAGE_NAME` variable.
 IMAGE_NAME=my-custom-image ./run-local.sh test-scripts/simple.js
 ```
-> :point-right: To use YOUR image, update the `run-local.sh` script or simply override the $IMAGE_NAME env variable.
+> :point_right: To use YOUR image, update the `run-local.sh` script or simply override the $IMAGE_NAME env variable.
 
 Again, this closely resembles the typical usage when you have a k6 binary installed on your system. You see log output
 directly on the console and see the result summary at the end of the test.
