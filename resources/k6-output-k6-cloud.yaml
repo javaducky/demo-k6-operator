@@ -1,0 +1,29 @@
+# K6 resources act as a trigger for starting a test run.
+#
+# For this execution, we'll output test metrics to our free-tier k6 Cloud
+# account using credentials stored as Kubernetes Secret and a configurable
+# remote write endpoint defined within a ConfigMap.
+#
+apiVersion: k6.io/v1alpha1
+kind: K6
+metadata:
+  name: k6-output-k6-cloud
+spec:
+  parallelism: 1
+  script:
+    configMap:
+      # Remember...we created the 'test-scripts' ConfigMap with the available scripts inside.
+      # Recreate the ConfigMag if you modify scripts or want additional scripts.
+      name: test-scripts
+      # TODO - Want a different test script? Change it here.
+      file: simple.js
+  arguments:  --tag testid=k6-output-k6-cloud
+  runner:
+    # TODO Change the image to your published image!
+    image: javaducky/demo-k6-operator:latest
+    env:
+      - name: K6_OUT
+        value: cloud
+    envFrom:
+     - secretRef:
+         name: k6-cloud-secrets

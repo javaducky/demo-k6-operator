@@ -132,6 +132,18 @@ kubectl create secret -n k6-demo generic prometheus-secrets \
  --from-literal=K6_PROMETHEUS_PASSWORD=[YOUR PASSWORD] 
 ```
 
+Not only can we use the Grafana _Free Forever Cloud_, but we can also sign up to use the 
+[Grafana k6 Cloud](https://app.k6.io/account/register) offering for the _same low price_ (FREE)! 
+
+After signing up, update the project ID and api-key placeholders below then create your 
+Kubernetes secret.
+
+```shell
+kubectl create secret -n k6-demo generic k6-cloud-secrets \
+ --from-literal=K6_CLOUD_PROJECT_ID=[YOUR PROJECT ID]
+ --from-literal=K6_CLOUD_TOKEN=[YOUR K6 API KEY]
+```
+
 Now that we have our necessary resources available in Kubernetes, we can trigger a test execution.
 
 
