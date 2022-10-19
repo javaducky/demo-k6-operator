@@ -115,6 +115,7 @@ kubectl create configmap test-scripts -n k6-demo \
  --from-file=./test-scripts/multi-scenario.js 
 ```
 
+### Grafana Cloud
 For my demonstration, I'm using the _Free Forever Cloud_ from [Grafana Cloud](https://grafana.com/products/cloud/)
 which will receive Prometheus metrics during test executions. 
 
@@ -132,6 +133,7 @@ kubectl create secret -n k6-demo generic prometheus-secrets \
  --from-literal=K6_PROMETHEUS_PASSWORD=[YOUR PASSWORD] 
 ```
 
+### Grafana k6 Cloud
 Not only can we use the Grafana _Free Forever Cloud_, but we can also sign up to use the 
 [Grafana k6 Cloud](https://app.k6.io/account/register) offering for the _same low price_ (FREE)! 
 
@@ -169,3 +171,8 @@ if one already existed.
 # Removes previous execution (if any), then run test with a unique `testid`
 ./run-kube.sh resources/k6-output-grafana-cloud.yaml
 ```
+:point_right: The same process can be used to publish metrics to the _Grafana k6 Cloud_ by running 
+the [k6-output-k6-cloud.yaml](resources/k6-output-k6-cloud.yaml) instead.
+
+> :warning: By default, the free-tier subscription for k6 Cloud will only allow for parallel execution,
+> nor multiple scenarios.
