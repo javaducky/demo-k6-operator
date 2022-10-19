@@ -40,7 +40,7 @@ docker build -t javaducky/demo-k6-operator:latest .
 docker push javaducky/demo-k6-operator:latest
 ```
 > :point_right: If you've browsed the [list of known extensions](https://k6.io/docs/extensions/getting-started/explore/) and wish
-> to include more custom functionality, update the [Dockerfile](Dockerfile) to include your desired extensions using the `--with`
+> to include more custom functionality, update the [Dockerfile](Dockerfile#L14) to include your desired extensions using the `--with`
 > option. More details about building custom binaries with xk6 can be found in the [documentation](https://k6.io/docs/extensions/guides/build-a-k6-binary-with-extensions/).
 
 
@@ -95,7 +95,7 @@ cd ../..
 
 ```
 > :warning: There may be an issue with the version of Kube you're running. Newer versions will need to remove
-> the `trivialVersions` flag from the `CRD_OPTIONS` defined in [dependencies/k6-operator/Makefile](dependencies/k6-operator/Makefile).
+> the `trivialVersions` flag from the `CRD_OPTIONS` defined in [dependencies/k6-operator/Makefile](https://github.com/grafana/k6-operator/blob/main/Makefile#L21).
 
 At this point, the operator and applicable resource definition have been installed into your Kubernetes cluster.
 
