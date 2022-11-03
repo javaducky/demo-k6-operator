@@ -78,6 +78,8 @@ k3d cluster create k6-demo-cluster \
  --agents 3 \
  --k3s-arg '--kube-apiserver-arg=feature-gates=EphemeralContainers=true@server:*'
 ```
+> :point-right: If you've previously created the cluster, you can start the cluster using `k3d cluster start k6-demo-cluster`
+> if not already running.
 
 Once this is complete, I now have a running Kubernetes cluster on which I can use `kubectl` as well as other tooling 
 like [k9s](https://k9scli.io/).
@@ -112,7 +114,8 @@ kubectl create namespace k6-demo
 kubectl create configmap test-scripts -n k6-demo \
  --from-file=./test-scripts/simple.js \
  --from-file=./test-scripts/simple-checks.js \
- --from-file=./test-scripts/multi-scenario.js 
+ --from-file=./test-scripts/multi-scenario.js \
+ --from-file=./test-scripts/door-buster-sale.js
 ```
 
 ### Grafana Cloud
