@@ -132,7 +132,7 @@ kubectl create configmap -n k6-demo prometheus-config \
 
 # Create a secret with our authentication data for our cloud account
 kubectl create secret -n k6-demo generic prometheus-secrets \
- --from-literal=K6_PROMETHEUS_USER=[YOUR USER] \
+ --from-literal=K6_PROMETHEUS_USERNAME=[YOUR USERNAME] \
  --from-literal=K6_PROMETHEUS_PASSWORD=[YOUR PASSWORD] 
 ```
 
