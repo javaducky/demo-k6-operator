@@ -128,12 +128,12 @@ following commands.
 ```shell
 # Create a ConfigMap with our non-secret configuration for our cloud account
 kubectl create configmap -n k6-demo prometheus-config \
- --from-literal=K6_PROMETHEUS_REMOTE_URL=[YOUR REMOTE WRITE ENDPOINT]
+ --from-literal=K6_PROMETHEUS_RW_SERVER_URL=[YOUR REMOTE WRITE ENDPOINT]
 
 # Create a secret with our authentication data for our cloud account
 kubectl create secret -n k6-demo generic prometheus-secrets \
- --from-literal=K6_PROMETHEUS_USERNAME=[YOUR USERNAME] \
- --from-literal=K6_PROMETHEUS_PASSWORD=[YOUR PASSWORD] 
+ --from-literal=K6_PROMETHEUS_RW_USERNAME=[YOUR USERNAME] \
+ --from-literal=K6_PROMETHEUS_RW_PASSWORD=[YOUR PASSWORD] 
 ```
 
 ### Grafana k6 Cloud
