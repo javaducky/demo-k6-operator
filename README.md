@@ -11,61 +11,6 @@ originally presented to the _Kubernetes & Cloud Native STL_ meetup group.
 
 There _may_ be others that I didn't recall as having them installed long ago. My apologies for any issues!
 
-## Gather sources
-For the demo, we'll be pulling the code sources for the operator as well as any desired extensions. For housekeeping
-purposes, we'll locate each repository in the `dependencies` directory.
-
-```shell
-# Pull down the operator which we'll install into Kubernetes.
-git clone git@github.com:grafana/k6-operator.git dependencies/k6-operator
-
-# At minimum, we're looking for the ability to output test metrics to Prometheus using Remote Write.
-git clone git@github.com:grafana/xk6-output-prometheus-remote.git dependencies/xk6-output-prometheus-remote
-```
-
-> :bookmark: If you'd like additional extensions to try out, take a look at the [Explore section](https://k6.io/docs/extensions/getting-started/explore/)
-> of the k6 documentation for a listing of known extensions.
-
-
-## Build our customized k6 image
-In order to create our k6 image using our desired extensions, we'll need to build using xk6. Our [Dockerfile](Dockerfile) will 
-set up our Go environment and handle the build. 
-
-```shell
-# Build the image to be published.
-# NOTE: You'll want to change the image name from `javaducky/...` to use your Dockerhub user id!
-docker build -t javaducky/demo-k6-operator:latest .
-
-# Publish your image to Dockerhub or whichever container registry your Kubernetes cluster can access.
-docker push javaducky/demo-k6-operator:latest
-```
-> :point_right: If you've browsed the [list of known extensions](https://k6.io/docs/extensions/getting-started/explore/) and wish
-> to include more custom functionality, update the [Dockerfile](Dockerfile#L14-L16) to include your desired extensions using the `--with`
-> option. More details about building custom binaries with xk6 can be found in the [documentation](https://k6.io/docs/extensions/guides/build-a-k6-binary-with-extensions/).
-
-
-## Running a local test
-Before entering the world of distributed tests in Kubernetes, let's exercise our new image the _typical_ way; a single
-instance, but we'll still use Docker to execute the test.
-
-```shell
-docker run -v $PWD:/scripts -it --rm javaducky/demo-k6-operator run /scripts/test-scripts/simple.js
-```
-:thumbsup: **OR** use the provided convenience script...
-```shell
-# Helper script to run k6 as a Docker container.
-./run-local.sh test-scripts/simple.js
-```
-:point_right: The above will run _my_ publicly available image, so you can override the image by specifying the `IMAGE_NAME`
-environment variable as in the following.
-```shell
-# To run another image, override the `IMAGE_NAME` variable.
-IMAGE_NAME=my-custom-image ./run-local.sh test-scripts/simple.js
-```
-
-Again, this closely resembles the typical usage when you have a k6 binary installed on your system. You see log output
-directly on the console and see the result summary at the end of the test.
-
 
 ## Create a local Kubernetes cluster (optional)
 I'm using [k3d](https://k3d.io/) locally to run a _Kubernetes_ cluster within _Docker_. Once installed, I use 
@@ -87,7 +32,15 @@ like [k9s](https://k9scli.io/).
 
 ## Build and install the k6-operator
 > :thumbsup: Always ensure your `kubectl` is set to the appropriate profile targeting the correct cluster!
-Clone the k6-operator source code into our working directory. We'll be building and installing directly from the source code.
+
+For housekeeping purposes, we'll clone the k6-operator source code into our `dependencies` directory. 
+
+```shell
+# Pull down the operator which we'll install into Kubernetes.
+git clone git@github.com:grafana/k6-operator.git dependencies/k6-operator
+```
+
+Now we'll build and install directly from the source code.
 
 ```shell
 # Change into the k6-operator source directory. (You downloaded this in the first step!)

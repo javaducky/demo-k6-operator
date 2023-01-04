@@ -18,8 +18,6 @@ spec:
       file: simple.js
   arguments:  --tag testid=k6-output-k6-cloud
   runner:
-    # TODO Change the image to your published image!
-    image: javaducky/demo-k6-operator:latest
     env:
       - name: K6_OUT
         value: cloud

@@ -19,11 +19,12 @@ spec:
       file: simple.js
   arguments:  --tag testid=k6-output-grafana-cloud
   runner:
-    # TODO Change the image to your published image!
-    image: javaducky/demo-k6-operator:latest
+    # As of v0.42.0, k6 provides Prometheus RW as an experimental module!
+    # See https://github.com/grafana/k6/releases/tag/v0.42.0
+    image: grafana/k6:0.42.0
     env:
       - name: K6_OUT
-        value: output-prometheus-remote
+        value: experimental-prometheus-rw
     envFrom:
      - configMapRef:
          name: prometheus-config

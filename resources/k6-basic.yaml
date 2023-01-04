@@ -1,6 +1,6 @@
 # K6 resources act as a trigger for starting a test run.
 #
-# Simple test execution which uses the public k6 image (NOT your custom image). Output must
+# Simple test execution which uses the public k6 image. Output must
 # be scraped from container logs and aggregated on your own.
 #
 apiVersion: k6.io/v1alpha1
