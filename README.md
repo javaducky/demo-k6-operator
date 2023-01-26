@@ -17,10 +17,10 @@ purposes, we'll locate each repository in the `dependencies` directory.
 
 ```shell
 # Pull down the operator which we'll install into Kubernetes.
-git clone git@github.com:grafana/k6-operator.git dependencies/k6-operator
+git clone https://github.com/grafana/k6-operator.git dependencies/k6-operator
 
 # At minimum, we're looking for the ability to output test metrics to Prometheus using Remote Write.
-git clone git@github.com:grafana/xk6-output-prometheus-remote.git dependencies/xk6-output-prometheus-remote
+git clone https://github.com/grafana/xk6-output-prometheus-remote.git dependencies/xk6-output-prometheus-remote
 ```
 
 > :bookmark: If you'd like additional extensions to try out, take a look at the [Explore section](https://k6.io/docs/extensions/getting-started/explore/)
@@ -125,6 +125,8 @@ which will receive Prometheus metrics during test executions.
 Once signed up, update the Prometheus endpoint, user, and password (api-key) placeholders for your account in the
 following commands.
 
+> :point-right: Take a look at the [k6 docs](https://k6.io/docs/results-output/real-time/grafana-cloud/) for more information on setting up your account and API key.
+
 ```shell
 # Create a ConfigMap with our non-secret configuration for our cloud account
 kubectl create configmap -n k6-demo prometheus-config \
@@ -142,6 +144,8 @@ Not only can we use the Grafana _Free Forever Cloud_, but we can also sign up to
 
 After signing up, update the project ID and api-key placeholders below then create your 
 Kubernetes secret.
+
+> :point-right: Take a look at the [k6 docs](https://k6.io/docs/cloud/integrations/token/#organization-api-token) for more information on creating your API key.
 
 ```shell
 kubectl create secret -n k6-demo generic k6-cloud-secrets \
