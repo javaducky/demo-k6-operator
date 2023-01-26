@@ -78,7 +78,7 @@ k3d cluster create k6-demo-cluster \
  --agents 3 \
  --k3s-arg '--kube-apiserver-arg=feature-gates=EphemeralContainers=true@server:*'
 ```
-> :point-right: If you've previously created the cluster, you can start the cluster using `k3d cluster start k6-demo-cluster`
+> :point_right: If you've previously created the cluster, you can start the cluster using `k3d cluster start k6-demo-cluster`
 > if not already running.
 
 Once this is complete, I now have a running Kubernetes cluster on which I can use `kubectl` as well as other tooling 
@@ -125,7 +125,7 @@ which will receive Prometheus metrics during test executions.
 Once signed up, update the Prometheus endpoint, user, and password (api-key) placeholders for your account in the
 following commands.
 
-> :point-right: Take a look at the [k6 docs](https://k6.io/docs/results-output/real-time/grafana-cloud/) for more information on setting up your account and API key.
+> :point_right: Take a look at the [k6 docs](https://k6.io/docs/results-output/real-time/grafana-cloud/) for more information on setting up your account and API key.
 
 ```shell
 # Create a ConfigMap with our non-secret configuration for our cloud account
@@ -145,7 +145,7 @@ Not only can we use the Grafana _Free Forever Cloud_, but we can also sign up to
 After signing up, update the project ID and api-key placeholders below then create your 
 Kubernetes secret.
 
-> :point-right: Take a look at the [k6 docs](https://k6.io/docs/cloud/integrations/token/#organization-api-token) for more information on creating your API key.
+> :point_right: Take a look at the [k6 docs](https://k6.io/docs/cloud/integrations/token/#organization-api-token) for more information on creating your API key.
 
 ```shell
 kubectl create secret -n k6-demo generic k6-cloud-secrets \
