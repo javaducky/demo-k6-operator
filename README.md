@@ -1,5 +1,5 @@
 # Demo for k6-operator
-Demo files for the [_"Running distributed load tests with k6"_](https://www.meetup.com/kubernetes-cloud-native-stl/events/288633674/), 
+Demo files for the [_"Running distributed load tests with k6"_](https://www.meetup.com/kubernetes-cloud-native-stl/events/288633674/) ([Video](https://www.youtube.com/watch?v=wv2jq8rS-mk)), 
 originally presented to the _Kubernetes & Cloud Native STL_ meetup group.
 
 ## Prerequisites
