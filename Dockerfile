@@ -5,18 +5,19 @@
 #
 
 # Stage 1: Setup Go environment and build custom k6 from sources using xk6 (https://github.com/grafana/xk6)
-FROM golang:1.19-alpine as builder
+FROM golang:1.20-alpine as builder
 WORKDIR $GOPATH/src/go.k6.io/k6
 ADD . .
 RUN apk --no-cache add git
 RUN CGO_ENABLED=0 go install go.k6.io/xk6/cmd/xk6@latest
 # TODO - Want more extensions?! Provide additional `--with ...` lines to the following command:
-RUN CGO_ENABLED=0 xk6 build \
-    --with github.com/grafana/xk6-output-prometheus-remote=${PWD}/dependencies/xk6-output-prometheus-remote \
+RUN CGO_ENABLED=0 xk6 build v0.44.1 \
+    --with github.com/grafana/xk6-output-influxdb=${PWD}/dependencies/xk6-output-influxdb \
+    --with github.com/grafana/xk6-output-kafka=${PWD}/dependencies/xk6-output-kafka \
     --output /tmp/k6
 
 # Stage 2: Create lightweight runtime environment for the custom k6 binary
-FROM alpine:3.16
+FROM alpine:3.17
 RUN apk add --no-cache ca-certificates \
     && adduser -D -u 12345 -g 12345 k6
 COPY --from=builder /tmp/k6 /usr/bin/k6

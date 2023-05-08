@@ -2,6 +2,10 @@
 Demo files for the [_"Running distributed load tests with k6"_](https://www.meetup.com/kubernetes-cloud-native-stl/events/288633674/) ([Video](https://www.youtube.com/watch?v=wv2jq8rS-mk)), 
 originally presented to the _Kubernetes & Cloud Native STL_ meetup group.
 
+## Change History
+- (v0.44.1) Adding option for InfluxDB 2.x and Kafka as output options. Prometheus supported directly as experimental module.
+- (v0.41.0) Intial version, provides Prometheus support by building custom k6 using xk6-output-prometheus-remote extension.
+
 ## Prerequisites
 * [git](https://git-scm.com/) - For accessing the sourcecode repositories.
 * [Docker](https://docs.docker.com/get-docker/) - For building our custom k6 and running the examples.
@@ -19,8 +23,9 @@ purposes, we'll locate each repository in the `dependencies` directory.
 # Pull down the operator which we'll install into Kubernetes.
 git clone https://github.com/grafana/k6-operator.git dependencies/k6-operator
 
-# At minimum, we're looking for the ability to output test metrics to Prometheus using Remote Write.
-git clone https://github.com/grafana/xk6-output-prometheus-remote.git dependencies/xk6-output-prometheus-remote
+# At minimum, we're adding the ability to output test metrics to InfluxDB as well as Kafka.
+git clone https://github.com/grafana/xk6-output-influxdb dependencies/xk6-output-influxdb
+git clone https://github.com/grafana/xk6-output-kafka dependencies/xk6-output-kafka
 ```
 
 > :bookmark: If you'd like additional extensions to try out, take a look at the [Explore section](https://k6.io/docs/extensions/getting-started/explore/)
@@ -130,7 +135,8 @@ following commands.
 ```shell
 # Create a ConfigMap with our non-secret configuration for our cloud account
 kubectl create configmap -n k6-demo prometheus-config \
- --from-literal=K6_PROMETHEUS_RW_SERVER_URL=[YOUR REMOTE WRITE ENDPOINT]
+ --from-literal=K6_PROMETHEUS_RW_SERVER_URL=[YOUR REMOTE WRITE ENDPOINT] \
+ --from-literal=K6_PROMETHEUS_RW_STALE_MARKERS=true
 
 # Create a secret with our authentication data for our cloud account
 kubectl create secret -n k6-demo generic prometheus-secrets \

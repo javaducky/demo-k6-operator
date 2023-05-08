@@ -23,7 +23,7 @@ spec:
     image: javaducky/demo-k6-operator:latest
     env:
       - name: K6_OUT
-        value: xk6-prometheus-rw
+        value: experimental-prometheus-rw
     envFrom:
      - configMapRef:
          name: prometheus-config
