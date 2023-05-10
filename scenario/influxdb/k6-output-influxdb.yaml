@@ -1,0 +1,30 @@
+# K6 resources act as a trigger for starting a test run.
+#
+# For this execution, we'll output test metrics to an InfluxDB instance.
+#
+apiVersion: k6.io/v1alpha1
+kind: K6
+metadata:
+  name: k6-output-influxdb
+spec:
+  parallelism: 4
+  script:
+    configMap:
+      # Remember...we created the 'test-scripts' ConfigMap with the available scripts inside.
+      # Recreate the ConfigMag if you modify scripts or want additional scripts.
+      name: test-scripts
+      # TODO - Want a different test script? Change it here.
+      file: simple.js
+  arguments:  --tag testid=k6-output-influxdb
+  runner:
+    # TODO Change the image to your published image!
+    image: javaducky/demo-k6-operator:latest
+    env:
+      - name: K6_OUT
+        value: xk6-influxdb=http://host.k3d.internal:8086/demo
+      - name: K6_INFLUXDB_ORGANIZATION
+        value: k6io
+      - name: K6_INFLUXDB_INSECURE
+        value: "true"
+      - name: K6_INFLUXDB_TOKEN
+        value: "EEKpryGZk8pVDXmIuy484BKUxM5jOEDv7YNoeNZUbsNbpbPbP6kK_qY9Zsyw7zNnlZ7pHG16FYzNaqwLMBUz8g=="

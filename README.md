@@ -2,10 +2,6 @@
 Demo files for the [_"Running distributed load tests with k6"_](https://www.meetup.com/kubernetes-cloud-native-stl/events/288633674/) ([Video](https://www.youtube.com/watch?v=wv2jq8rS-mk)), 
 originally presented to the _Kubernetes & Cloud Native STL_ meetup group.
 
-## Change History
-- (v0.44.1) Adding option for InfluxDB 2.x and Kafka as output options. Prometheus supported directly as experimental module.
-- (v0.41.0) Intial version, provides Prometheus support by building custom k6 using xk6-output-prometheus-remote extension.
-
 ## Prerequisites
 * [git](https://git-scm.com/) - For accessing the sourcecode repositories.
 * [Docker](https://docs.docker.com/get-docker/) - For building our custom k6 and running the examples.
@@ -123,7 +119,7 @@ kubectl create configmap test-scripts -n k6-demo \
  --from-file=./test-scripts/door-buster-sale.js
 ```
 
-### Grafana Cloud
+### Grafana Cloud (Prometheus)
 For my demonstration, I'm using the _Free Forever Cloud_ from [Grafana Cloud](https://grafana.com/products/cloud/)
 which will receive Prometheus metrics during test executions. 
 
@@ -189,3 +185,7 @@ the [k6-output-k6-cloud.yaml](resources/k6-output-k6-cloud.yaml) instead.
 
 > :warning: By default, the free-tier subscription for k6 Cloud will only allow for parallel execution,
 > nor multiple scenarios.
+
+## Looking for more?!
+Additional scenarios are available:
+- [InfluxDB](scenario/influxdb/README.md) - Output metrics to an InfluxDB 2.0 instance running in Docker.
