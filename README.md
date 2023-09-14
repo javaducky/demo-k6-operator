@@ -76,8 +76,7 @@ the following command to create a cluster named `k6-demo-cluster`.
 k3d cluster create k6-demo-cluster \
  --api-port 6550 \
  -p "8081:80@loadbalancer" \
- --agents 3 \
- --k3s-arg '--kube-apiserver-arg=feature-gates=EphemeralContainers=true@server:*'
+ --agents 3
 ```
 > :point_right: If you've previously created the cluster, you can start the cluster using `k3d cluster start k6-demo-cluster`
 > if not already running.
