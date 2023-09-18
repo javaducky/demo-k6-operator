@@ -2,8 +2,8 @@
 
 set -e
 
-if [ $# -ne 1 ]; then
-    echo "Usage: ./run-local.sh <SCRIPT_NAME>"
+if [ $# -lt 1 ]; then
+    echo "Usage: ./run-local.sh <SCRIPT_NAME> [K6_OPTIONS]"
     exit 1
 fi
 
@@ -11,4 +11,4 @@ fi
 # If not, override the name on the command-line with `IMAGE_NAME=...`.
 IMAGE_NAME=${IMAGE_NAME:="javaducky/demo-k6-operator:latest"}
 
-docker run -v $PWD:/scripts -it --rm $IMAGE_NAME run /scripts/$1
+docker run -v $PWD:/scripts -it --rm $IMAGE_NAME run /scripts/$1 ${@:2}
