@@ -99,6 +99,14 @@ cd ../..
 > :warning: There may be an issue with the version of Kube you're running. Newer versions will need to remove
 > the `trivialVersions` flag from the `CRD_OPTIONS` defined in [k6-operator/Makefile](https://github.com/grafana/k6-operator/blob/main/Makefile#L21).
 
+> :point_right: If you'd like to perform k6-browser tests, I've got custom images for the operator which can be installed instead:
+> ```shell
+> # Change into the k6-operator source directory. (You downloaded this in the first step!)
+> cd dependencies/k6-operator
+> IMG_NAME="javaducky/k6-operator" IMG_TAG="with-browser" make deploy
+> cd ../..
+> ```
+
 At this point, the operator and applicable resource definition have been installed into your Kubernetes cluster.
 
 
@@ -114,6 +122,7 @@ kubectl create namespace k6-demo
 kubectl create configmap test-scripts -n k6-demo \
  --from-file=./test-scripts/simple.js \
  --from-file=./test-scripts/simple-checks.js \
+ --from-file=./test-scripts/simple-browser.js \
  --from-file=./test-scripts/multi-scenario.js \
  --from-file=./test-scripts/door-buster-sale.js
 ```
