@@ -114,6 +114,7 @@ kubectl create namespace k6-demo
 kubectl create configmap test-scripts -n k6-demo \
  --from-file=./test-scripts/simple.js \
  --from-file=./test-scripts/simple-checks.js \
+ --from-file=./test-scripts/simple-browser.js \
  --from-file=./test-scripts/multi-scenario.js \
  --from-file=./test-scripts/door-buster-sale.js
 ```
