@@ -5,7 +5,7 @@
 #
 
 # Stage 1: Setup Go environment and build custom k6 from sources using xk6 (https://github.com/grafana/xk6)
-FROM golang:1.20-alpine as builder
+FROM golang:1.21-alpine as builder
 WORKDIR $GOPATH/src/go.k6.io/k6
 ADD . .
 RUN apk --no-cache add git
@@ -17,7 +17,7 @@ RUN CGO_ENABLED=0 xk6 build latest \
     --output /tmp/k6
 
 # Stage 2: Create lightweight runtime environment for the custom k6 binary with browser support
-FROM alpine:3.17
+FROM alpine:3.19
 RUN apk add --no-cache ca-certificates chromium-swiftshader \
     && adduser -D -u 12345 -g 12345 k6
 COPY --from=builder /tmp/k6 /usr/bin/k6

@@ -5,7 +5,7 @@
 # remote write endpoint defined within a ConfigMap.
 #
 apiVersion: k6.io/v1alpha1
-kind: K6
+kind: TestRun
 metadata:
   name: k6-output-grafana-cloud
 spec:
