@@ -24,7 +24,8 @@ git clone https://github.com/grafana/xk6-output-influxdb dependencies/xk6-output
 git clone https://github.com/grafana/xk6-output-kafka dependencies/xk6-output-kafka
 ```
 
-> :bookmark: If you'd like additional extensions to try out, take a look at the [Explore section](https://k6.io/docs/extensions/getting-started/explore/)
+> [!NOTE]
+> If you'd like additional extensions to try out, take a look at the [Explore section](https://k6.io/docs/extensions/getting-started/explore/)
 > of the k6 documentation for a listing of known extensions.
 
 
@@ -40,7 +41,8 @@ docker build -t javaducky/demo-k6-operator:latest .
 # Publish your image to Dockerhub or whichever container registry your Kubernetes cluster can access.
 docker push javaducky/demo-k6-operator:latest
 ```
-> :point_right: If you've browsed the [list of known extensions](https://k6.io/docs/extensions/getting-started/explore/) and wish
+> [!NOTE]
+> If you've browsed the [list of known extensions](https://k6.io/docs/extensions/getting-started/explore/) and wish
 > to include more custom functionality, update the [Dockerfile](Dockerfile#L14-L16) to include your desired extensions using the `--with`
 > option. More details about building custom binaries with xk6 can be found in the [documentation](https://k6.io/docs/extensions/guides/build-a-k6-binary-with-extensions/).
 
@@ -78,7 +80,8 @@ k3d cluster create k6-demo-cluster \
  -p "8081:80@loadbalancer" \
  --agents 3
 ```
-> :point_right: If you've previously created the cluster, you can start the cluster using `k3d cluster start k6-demo-cluster`
+> [!NOTE]
+> If you've previously created the cluster, you can start the cluster using `k3d cluster start k6-demo-cluster`
 > if not already running.
 
 Once this is complete, I now have a running Kubernetes cluster on which I can use `kubectl` as well as other tooling 
@@ -86,11 +89,12 @@ like [k9s](https://k9scli.io/).
 
 
 ## Build and install the k6-operator
-> :thumbsup: Always ensure your `kubectl` is set to the appropriate profile targeting the correct cluster!
+> [!IMPORTANT]
+> Always ensure your `kubectl` is set to the appropriate profile targeting the correct cluster!
 Clone the k6-operator source code into our working directory. We'll be building and installing directly from the source code.
 
-> [!TIP] Helm chart available!
-> If you'd rather install via Helm, you can install the k6 chart as below:
+> [!TIP]
+> **Helm chart available!** If you'd rather install via Helm, you can install the k6 chart as below:
 > ```shell
 > helm repo add grafana https://grafana.github.io/helm-charts
 > helm repo update
@@ -104,10 +108,8 @@ make deploy
 cd ../..
 
 ```
-> :warning: There may be an issue with the version of Kube you're running. Newer versions will need to remove
-> the `trivialVersions` flag from the `CRD_OPTIONS` defined in [k6-operator/Makefile](https://github.com/grafana/k6-operator/blob/main/Makefile#L21).
-
-> :point_right: If you'd like to perform k6-browser tests, I've got custom images for the operator which can be installed instead:
+> [!NOTE]
+> If you'd like to perform k6-browser tests, I've got custom images for the operator which can be installed instead:
 > ```shell
 > # Change into the k6-operator source directory. (You downloaded this in the first step!)
 > cd dependencies/k6-operator
@@ -142,7 +144,8 @@ which will receive Prometheus metrics during test executions.
 Once signed up, update the Prometheus endpoint, user, and password (api-key) placeholders for your account in the
 following commands.
 
-> :point_right: Take a look at the [k6 docs](https://k6.io/docs/results-output/real-time/grafana-cloud/) for more information on setting up your account and API key.
+> [!TIP]
+> Take a look at the [k6 docs](https://k6.io/docs/results-output/real-time/grafana-cloud/) for more information on setting up your account and API key.
 
 ```shell
 # Create a ConfigMap with our non-secret configuration for our cloud account
@@ -163,7 +166,8 @@ Not only can we use the Grafana _Free Forever Cloud_, but we can also sign up to
 After signing up, update the project ID and api-key placeholders below then create your 
 Kubernetes secret.
 
-> :point_right: Take a look at the [k6 docs](https://k6.io/docs/cloud/integrations/token/#organization-api-token) for more information on creating your API key.
+> [!TIP]
+> Take a look at the [k6 docs](https://k6.io/docs/cloud/integrations/token/#organization-api-token) for more information on creating your API key.
 
 ```shell
 kubectl create secret -n k6-demo generic k6-cloud-secrets \
@@ -199,7 +203,8 @@ if one already existed.
 :point_right: The same process can be used to publish metrics to the _Grafana k6 Cloud_ by running 
 the [k6-output-k6-cloud.yaml](resources/k6-output-k6-cloud.yaml) instead.
 
-> :warning: By default, the free-tier subscription for k6 Cloud will only allow for parallel execution,
+> [!WARNING]
+> By default, the free-tier subscription for k6 Cloud will only allow for parallel execution,
 > nor multiple scenarios.
 
 ## Looking for more?!
