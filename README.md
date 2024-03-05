@@ -89,6 +89,14 @@ like [k9s](https://k9scli.io/).
 > :thumbsup: Always ensure your `kubectl` is set to the appropriate profile targeting the correct cluster!
 Clone the k6-operator source code into our working directory. We'll be building and installing directly from the source code.
 
+> [!TIP] Helm chart available!
+> If you'd rather install via Helm, you can install the k6 chart as below:
+> ```shell
+> helm repo add grafana https://grafana.github.io/helm-charts
+> helm repo update
+> helm install k6-operator grafana/k6-operator
+> ```
+
 ```shell
 # Change into the k6-operator source directory. (You downloaded this in the first step!)
 cd dependencies/k6-operator
